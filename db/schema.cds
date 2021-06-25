@@ -9,6 +9,7 @@ using {ADDRESSES.Addresses as AddressService} from '../srv/external/ADDRESSES.cs
 namespace dalrae.cap.reuse.import;
 
 extend base.Orders with {
+  price : Double @title: 'Price';
   items : Association to many OrderItems
             on items.order = $self;
 };
