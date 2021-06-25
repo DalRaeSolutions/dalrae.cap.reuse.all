@@ -8,17 +8,6 @@ using {ADDRESSES.Addresses as AddressService} from '../srv/external/ADDRESSES.cs
 
 namespace dalrae.cap.reuse.import;
 
-// @(restrict : [
-//   {
-//     grant : 'READ',
-//     to    : 'admin'
-//   },
-//   {
-//     grant : '*',
-//     to    : 'customer',
-//     where : 'customer_ID = $user.customer'
-//   }
-// ])
 extend base.Orders with {
   items : Association to many OrderItems
             on items.order = $self;
@@ -34,3 +23,16 @@ entity OrderItems : cuid, managed {
 extend base.Customers with {
   address : Association to one AddressService;
 }
+
+
+// @(restrict : [
+//   {
+//     grant : 'READ',
+//     to    : 'admin'
+//   },
+//   {
+//     grant : '*',
+//     to    : 'customer',
+//     where : 'customer_ID = $user.customer'
+//   }
+// ])

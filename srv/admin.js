@@ -4,9 +4,10 @@ module.exports = async (srv) => { // called by server.js
   const cds = require('@sap/cds')
   const AddressService = await cds.connect.to('AddressService');
 
-  const { Addresses, Customers } = srv.entities; //cds.entities("dalrae.cap.reuse.import");
-  
-  srv.on('READ', 'Service.Address', async (req) => {
+  const { Customers } = srv.entities;
+
+
+  srv.on('READ', 'AdminService.Address', async (req) => {
     console.log(' > address service')
     if (req.query.SELECT.one) {
       console.log('single here')
@@ -26,7 +27,7 @@ module.exports = async (srv) => { // called by server.js
       return curr;
     }, []).filter(d => !!d);
 
-    const qry = SELECT.from('Service.Addresses').where('ID in ', ids);
+    const qry = SELECT.from('AdminService.Addresses').where('ID in ', ids);
     const res = await AddressService.tx().run(qry);
 
     data.map(d => {
